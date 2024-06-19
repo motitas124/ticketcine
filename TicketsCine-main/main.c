@@ -1,79 +1,81 @@
 #include <stdio.h>
 #include "funciones.h"
 
-void main () {
-    char peliculas[10][4][40] = {
-        {"1", "Avatar", "10:20", "Fantasia"},
-        {"", "", "", ""},
-        {"", "", "", ""},
-        {"", "", "", ""},
-        {"", "", "", ""},
-        {"", "", "", ""},
-        {"", "", "", ""},
-        {"", "", "", ""},
-        {"", "", "", ""},
-        {"", "", "", ""}
-    };
-    
-    double precio[3] = {7, 3.5, 3};
-    
-    char clientes[5][2][40] = {
-        {"", ""},
-        {"Luis", "123456788"},
-        {"", ""},
-        {"", ""},
-        {"", ""}
-    };
+int main (int argc, char *argv[]) {
 
-    int reserva[10][4] = {
-        {0, 1, 2, 1},
-        {-1, -1, -1, -1},
-        {-1, -1, -1, -1},
-        {-1, -1, -1, -1},
-        {-1, -1, -1, -1},
-        {-1, -1, -1, -1},
-        {-1, -1, -1, -1},
-        {-1, -1, -1, -1},
-        {-1, -1, -1, -1},
-        {-1, -1, -1, -1}
-    };
+    char peliculas[10][4][40]={{"1","Avatar","10:20","Fantasia"},
+                               {"2","REC","8:30","Terror"},
+                               {"3","Angry Birds","11:00","Animacion"},
+                               {"4","Elementos","12:30","Animacion"},
+                               {"5","Sherk","9:30","Fantasia"},
+                               {"6","IT","13:00","Terror"},
+                               {"7","El Aro","14:30","Terror"},
+                               {"8","Garfield","15:00","Animacion"},
+                               {"9","Las 50 sombras de grey","16:00","Fantasia"},
+                               {"10","Sing","17:30","Animacion"}};
+    double precio[3]={7,3.5,3};
+    char clientes[5][2][40]={{"",""},
+                             {"",""},
+                             {"",""},
+                             {"",""},
+                             {"",""}};
 
-    int opcion1 = 0, opcion2 = 0, opcion3 = 0;
-    do {
-        printf("Escoja una opcion:\n1. Ingresar Cliente\n2. Ver Peliculas\n3. Buscar Pelicula\n4. Comprar Ticket\n5. Ver Compras\n>>");
-        scanf("%d", &opcion2);
-        
-        switch (opcion2) {
+    int reserva[10][4]={{0,1,2,1},
+                         {-1,-1,-1,-1},
+                         {-1,-1,-1,-1},
+                         {-1,-1,-1,-1},
+                         {-1,-1,-1,-1},
+                         {-1,-1,-1,-1},
+                         {-1,-1,-1,-1},
+                         {-1,-1,-1,-1},
+                         {-1,-1,-1,-1},
+                         {-1,-1,-1,-1}};
+
+
+    int opcion1=0,opcion2=0,opcion3=0;
+    do
+    {
+        printf("Escoja una opcion:\n1.Ingresar Cliente\n2.Ver Peliculas\n3.Buscar Pelicula\n4.Comprar Ticket\n5.Ver Compras\n>>");
+        scanf("%d",&opcion2);
+        switch (opcion2)
+        {
+        case 1:
+            ingresarCliente(clientes);
+            break;
+        case 2:
+            listarPeliculas(peliculas);
+            break;
+        case 3:
+            printf("1.Por nombre\n2.Por Genero\n>>");
+            scanf("%d",&opcion3);
+            switch (opcion3)
+            {
             case 1:
-                ingresarCliente(clientes);
+                buscarporNombre(peliculas);
                 break;
             case 2:
-                listarPeliculas(peliculas);
-                break;
-            case 3:
-                printf("1. Por nombre\n2. Por Genero\n>>");
-                scanf("%d", &opcion3);
-                switch (opcion3) {
-                    case 1:
-                        buscarporNombre(peliculas);
-                        break;
-                    case 2:
-                        buscarporGenero(peliculas);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 4:
-                comprarTicket(peliculas, precio, clientes, reserva);
-                break;
-            case 5:
-                verCompras(peliculas, precio, clientes, reserva);
+                buscarporGenero(peliculas);
                 break;
             default:
                 break;
+            }
+            break;
+        case 4:
+            comprarTicket(peliculas,precio,clientes,reserva);
+            break;
+        case 5:
+            verCompras(peliculas,precio,clientes,reserva);
+            break;
+        default:
+
+            break;
         }
+
         printf("Desea escoger una nueva opcion: 1.Si/2.No\n>>");
-        scanf("%d", &opcion1);
-    } while (opcion1 == 1);
+        scanf("%d",&opcion1);
+    } while (opcion1==1);
+    
+
+ 
+ return 0;
 }
